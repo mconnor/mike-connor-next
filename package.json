@@ -2,7 +2,7 @@
   "name": "mike-connor-next",
   "version": "1.0.0",
   "description": "Putting it all together in Next",
-  "main": "index.js",  
+  "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -29,6 +29,7 @@
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
     "@types/styled-components": "^5.0.1",
+    "babel-plugin-styled-components": "^1.10.7",
     "typescript": "^3.8.3"
   }
 }

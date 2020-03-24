@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 
 const MainDiv = styled.div`
-color: white;
+color: ${({ theme }) => theme.colors.primary};
   padding: 20px;
   background: blue;
     a {
