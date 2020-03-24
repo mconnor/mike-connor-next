@@ -1,0 +1,34 @@
+{
+  "name": "mike-connor-next",
+  "version": "1.0.0",
+  "description": "Putting it all together in Next",
+  "main": "index.js",  
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mconnor/mike-connor-next.git"
+  },
+  "author": "Mike Connor <mike@cloudswing.info> (https://github.com/mconnor/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mconnor/mike-connor-next/issues"
+  },
+  "homepage": "https://github.com/mconnor/mike-connor-next#readme",
+  "dependencies": {
+    "next": "^9.3.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.3",
+    "@types/react": "^16.9.25",
+    "@types/react-dom": "^16.9.5",
+    "@types/styled-components": "^5.0.1",
+    "typescript": "^3.8.3"
+  }
+}
