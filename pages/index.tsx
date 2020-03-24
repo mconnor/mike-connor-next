@@ -4,13 +4,13 @@ import Link from 'next/link';
 
 
 type Props = {
-    title: string;
+    id: string;
 }
 
-const PostLink: React.FunctionComponent<Props> = ({ title }) => (
+const PostLink: React.FunctionComponent<Props> = props => (
     <li>
-        <Link href={`/post?title=${title}`}>
-            <a>{title}</a>
+        <Link href="/p/[id]" as={`/p/${props.id}`}>
+            <a>{props.id}</a>
         </Link>
     </li>
 );
@@ -20,9 +20,9 @@ export default function Blog() {
         <Layout>
             <h1>My Blog</h1>
             <ul>
-                <PostLink title="Hello Next.js" />
-                <PostLink title="Learn Next.js is awesome" />
-                <PostLink title="Deploy apps with Zeit" />
+                <PostLink id="hello-nextjs" />
+                <PostLink id="learn-nextjs" />
+                <PostLink id="deploy-nextjs" />
             </ul>
         </Layout>
     );
