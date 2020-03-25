@@ -26,6 +26,9 @@ export default function Header() {
       <Link href="/contact">
         <a>Contact</a>
       </Link>
+      <Link href="/batman">
+        <a>Batman</a>
+      </Link>
     </MainDiv>
   )
 }
