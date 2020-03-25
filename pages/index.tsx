@@ -1,29 +1,54 @@
-import React from 'react'
+import { NextPage } from 'next'
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import fetch from 'isomorphic-unfetch';
 
+
+type ShowType = {
+    id:string,
+    name:string
+}
 
 type Props = {
-    id: string;
+    shows: Array<ShowType>;
 }
 
-const PostLink: React.FunctionComponent<Props> = props => (
-    <li>
-        <Link href="/p/[id]" as={`/p/${props.id}`}>
-            <a>{props.id}</a>
-        </Link>
-    </li>
+type ScoreShowType = {
+    score: number,
+    show: ShowType
+}
+
+const Index:NextPage<Props> = ({ shows }) => (
+  <Layout>
+    <h1>Batman TV Shows</h1>
+    <ul>
+      {shows.map(show => (
+        <li key={show.id}>
+          <Link href="/p/[id]" as={`/p/${show.id}`}>
+            <a>{show.name}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </Layout>
 );
 
-export default function Blog() {
-    return (
-        <Layout>
-            <h1>My Blog</h1>
-            <ul>
-                <PostLink id="hello-nextjs" />
-                <PostLink id="learn-nextjs" />
-                <PostLink id="deploy-nextjs" />
-            </ul>
-        </Layout>
-    );
-}
+
+
+
+//https://nextjs.org/docs/api-reference/data-fetching/getInitialProps
+// If you're using Next.js 9.3 or newer, we recommend that
+//  you use getStaticProps or getServerSideProps instead of getInitialProps.
+
+Index.getInitialProps= async function() {
+  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
+  const data:Array<ScoreShowType> = await res.json();
+
+  console.log(`Show data fetched. Count: ${data.length}`);
+
+  return {
+    shows: data.map(entry => entry.show)
+  };
+};
+
+export default Index;
