@@ -1,54 +1,70 @@
-import { NextPage } from 'next'
+import { NextPage } from 'next';
 import Layout from '../components/Layout';
 import Link from 'next/link';
-import fetch from 'isomorphic-unfetch';
 
 
-type ShowType = {
+type PostType = {
     id:string,
-    name:string
+    title: string
 }
-
 type Props = {
-    shows: Array<ShowType>;
+    post: PostType
 }
 
-type ScoreShowType = {
-    score: number,
-    show: ShowType
+function getPosts():Array<PostType> {
+  return [
+    { id: 'hello-nextjs', title: 'Hello Next.js' },
+    { id: 'learn-nextjs', title: 'Learn Next.js is awesome' },
+    { id: 'deploy-nextjs', title: 'Deploy apps with ZEIT' }
+  ];
 }
 
-const Index:NextPage<Props> = ({ shows }) => (
-  <Layout>
-    <h1>Batman TV Shows</h1>
-    <ul>
-      {shows.map(show => (
-        <li key={show.id}>
-          <Link href="/p/[id]" as={`/p/${show.id}`}>
-            <a>{show.name}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </Layout>
-);
 
 
+const PostLink:NextPage<Props> = ({ post }) => (
+    <li>
+      <Link href="/p/[id]" as={`/p/${post.id}`}>
+        <a>{post.title}</a>
+      </Link>
+      <style jsx>{`
+         
+          a {
+            font-family: 'Arial';
+          }
+  
+          ul {
+            padding: 0;
+          }
+  
+          li {
+            list-style: none;
+            margin: 5px 0;
+          }
+  
+          a {
+            text-decoration: none;
+            color: blue;
+          }
+  
+          a:hover {
+            opacity: 0.6;
+          }
+        `}</style>
+    </li>
+  );
 
+const Blog = ()=> {
+    return (
+      <Layout>
+        <h1>My Blog</h1>
+        <ul>
+          {getPosts().map(post => (
+            <PostLink key={post.id} post={post} />
+          ))}
+        </ul>
 
-//https://nextjs.org/docs/api-reference/data-fetching/getInitialProps
-// If you're using Next.js 9.3 or newer, we recommend that
-//  you use getStaticProps or getServerSideProps instead of getInitialProps.
-
-Index.getInitialProps= async function() {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-  const data:Array<ScoreShowType> = await res.json();
-
-  console.log(`Show data fetched. Count: ${data.length}`);
-
-  return {
-    shows: data.map(entry => entry.show)
-  };
-};
-
-export default Index;
+      </Layout>
+    );
+  }
+  
+  export default Blog;
