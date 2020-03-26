@@ -16,17 +16,22 @@ const LayoutDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
 `;
 
 const Container = styled.div`
-    padding: 20px;
+    margin: 0  20px 0 20px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
-const Layout:React.FunctionComponent = ({ children }) => (
+const Layout: React.FunctionComponent = ({ children }) => (
     <LayoutDiv>
         <Header />
         <Container>
-         {children}
+            {children}
         </Container>
         <Footer />
     </LayoutDiv>
